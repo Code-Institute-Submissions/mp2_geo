@@ -3,19 +3,19 @@
 ## User Experience (UX)
 
 ### User stories
-	* First time visitor goals
-		* As a first time visitor, I want to instantly understand the main purpose of the site.
-		* As a first time visitor I want to be able to play the game without a steap or long learning curve.
-	* Returning visitor goals
-		* As a returning visitor, I want the game to still be challenging and exciting.
-	* Frequent user goals
-		* As a frequent user, I want the game to keep giving me content 
+* First time visitor goals
+	* As a first time visitor, I want to instantly understand the main purpose of the site.
+	* As a first time visitor I want to be able to play the game without a steap or long learning curve.
+* Returning visitor goals
+	* As a returning visitor, I want the game to still be challenging and exciting.
+* Frequent user goals
+	* As a frequent user, I want the game to keep giving me content 
 
 ### Design
-	* Colour Scheme
-	* Typography
-	* Imagery
-		* All images used on this page are part of the Google Street View Static API.
+* Colour Scheme
+* Typography
+* Imagery
+	* All images used on this page are part of the Google Street View Static API.
 
 ### Wireframes
 | Homepage desktop | Homepage mobile |
