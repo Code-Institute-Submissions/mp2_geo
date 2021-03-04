@@ -1,5 +1,21 @@
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: Gold;
+    height: 70px;
+    text-align: center;
+    z-index: 1;
+}
+#header * {
+    display: inline-block; /* took out float:left and added this */
+}
+
+
 #map {
 	height: 50%;
+	margin: 70px 0 0 0;
 }
 
 html,
@@ -7,4 +23,5 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Barlow Condensed', sans-serif;
 }

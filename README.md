@@ -35,6 +35,8 @@
 	* Git was used for version control throughout the whole project by using Github Desktop as well as command lines. 
 * [Github](https://github.com/)
 	* Github is used to store the projects code after being pushed from Git.
+* [Google Fonts](https://fonts.google.com/)
+	* Goole Fonts were used to import the Barlow Condensed font into the style.css file.
 * [Wireframes|cc](https://wireframe.cc)
 	* Wireframes|cc was used for creating the wireframes for this website.
 
