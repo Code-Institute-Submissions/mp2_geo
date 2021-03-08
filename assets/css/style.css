@@ -6,16 +6,16 @@
     background-color: Gold;
     height: 70px;
     text-align: center;
-    z-index: 1;
+    z-index: 4;
 }
 #header * {
-    display: inline-block; /* took out float:left and added this */
+    display: inline-block;
 }
 
-
-#map {
-	height: 50%;
-	margin: 70px 0 0 0;
+#map,
+#street-view {
+  height: 50%;
+  width: 100%;
 }
 
 html,
