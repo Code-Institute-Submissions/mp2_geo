@@ -23,14 +23,23 @@ function initialize() {
     );
     map.setStreetView(panorama);
 
-    var marker = google.maps.event.addListener(map, 'click', function (event) {
-        new google.maps.Marker({
-            position: event.latLng,
-            map: map,
-        });
-    });
-}
+    var guess;
 
+	function placeMarker(location) {
+	  if ( guess ) {
+	    guess.setPosition(location);
+	  } else {
+	    guess = new google.maps.Marker({
+	      position: location,
+	      map: map
+	    });
+	  }
+	}
+
+	google.maps.event.addListener(map, 'click', function(event) {
+	  placeMarker(event.latLng);
+	});
+}; //closes initialize().
 
 function pickRandomLocation() {
 	var randomLocations = [
@@ -45,29 +54,18 @@ function pickRandomLocation() {
 		{lat: 53.320786961239314, lng: 6.004216222617715},
 		{lat: 53.33896134564871, lng: 6.01446520065522},
 		{lat: 53.326723152145405, lng: 5.998869913983112}
+        // bakkeveen
+        // buitenpost
+        // stavoren
+        // lemmer
 
-		// harlingen
-		// franeker
-		// sneek
-		// heerenveen
-		// joure
-		// ijlst
-		// heeg
-		// drachten
-		// burgum
-		// grou
-		// bolsward
-		// makkum
-		// balk
-		// bakkeveen
-		// buitenpost
-		// stavoren
-		// lemmer
+        // vlieland
+        // terschelling
+        // ameland
+        // schiermonnikoog
+    ]
 
-		// vlieland
-		// terschelling
-		// ameland
-		// schiermonnikoog
-	]
-	return randomLocations[Math.floor(Math.random() * randomLocations.length)]
-}
+    randomLocation = locations[Math.floor(Math.random() * locations.length)];
+
+    return randomLocation
+};
