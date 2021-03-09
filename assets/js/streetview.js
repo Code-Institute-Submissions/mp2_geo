@@ -29,7 +29,6 @@ function initialize() {
     map.setStreetView(panorama);
 
     var guess;
-
 	function placeMarker(location) {
 	  if ( guess ) {
 	    guess.setPosition(location);
@@ -40,12 +39,30 @@ function initialize() {
 	    });
 	  }
 	}
-
 	google.maps.event.addListener(map, 'click', function(event) {
 	  placeMarker(event.latLng);
 	});
 }; //closes initialize().
+	confirm(guess);
 
+}; //closes initialize()
+
+
+// HELPER FUNCTIONS 
+// function that returns a score based on user's guess and the location to guess (targetLocation)
+function calculateRoundScore(targetLocation, guess) {
+	var targetCoordinates = new google.maps.latLng(targetLocation.lat, targetLocation.lng);
+	console.log(targetCoordinates);
+	var guessCoordinates = new google.maps.latLng(guess.lat, guess.lng);
+	console.log(guessCoordinates);
+};
+
+// function that prompts user to confirm their guess
+function confirm(guess) {
+    
+};
+
+// function that returns a random location from a list of coordinates 
 function pickRandomLocation() {
     var locations = [
         // leeuwarden
