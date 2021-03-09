@@ -1,20 +1,17 @@
-// as per instructions in API documentation: https://developers.google.com/maps/documentation/javascript/examples/streetview-simple#maps_streetview_simple-html
+// function that initializes as per instructions in API documentation: https://developers.google.com/maps/documentation/javascript/examples/streetview-simple#maps_streetview_simple-html
 function initialize() {
     var score = 0;
     var round = 1;
-
-    var friesland = {
-        lat: 53.164164,
-        lng: 5.781754,
-    };
+    var guess;
+    var friesland = { lat: 53.164164, lng: 5.781754 };
     var targetLocation = pickRandomLocation();
 
+    // INIT MAP + PANO
     var map = new google.maps.Map(document.getElementById("map"), {
         center: friesland,
         zoom: 9,
         disableDefaultUI: true
     });
-
     var panorama = new google.maps.StreetViewPanorama(
         document.getElementById("street-view"), {
             position: targetLocation,
@@ -28,17 +25,18 @@ function initialize() {
     );
     map.setStreetView(panorama);
 
-    var guess;
-	
+    // DROP MARKER
 	google.maps.event.addListener(map, 'click', function(event) {
 	  placeMarker(event.latLng);
 	});
-	confirm(guess);
 
-}; //closes initialize()
+	//
+	confirm(targetLocation, guess);
+};
 
 
-// HELPER FUNCTIONS 
+// HELPER FUNCTIONS
+// function that makes sure there is only one marker placed. 
 function placeMarker(location) {
 	  if ( guess ) {
 	    guess.setPosition(location);
@@ -57,13 +55,30 @@ function calculateRoundScore(targetLocation, guess) {
 	console.log(targetCoordinates);
 	console.log(guessCoordinates);
 
-	var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guessCoordinates) //Returns the distance, in meters, between two LatLngs
-	return 100 - (distance * 2)
+	var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guessCoordinates); //Returns the distance, in meters, between two LatLngs
+	var distanceKm = distance * 1000
+
+	if (distanceKm < 50) {
+		score = score + ((50 - distanceKm)*2)
+	}
 };
 
+// function that is called when the game is ended and presents user with final score.
+function finishGame() {
+
+}
+
 // function that prompts user to confirm their guess
-function confirm(guess) {
-    
+function confirm(targetLocation, guess) {
+
+	// calculate scores
+    calculateRoundScore(targetLocation, guess);
+    // update rounds
+    if (round < 10) {
+    	round = round + 1;
+    } else {
+    	finishGame();
+    }
 };
 
 // function that returns a random location from a list of coordinates 
