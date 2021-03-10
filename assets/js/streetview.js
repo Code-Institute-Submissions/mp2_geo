@@ -2,13 +2,14 @@
 function initialize() {
     var score = 0;
     var round = 1;
-    var guess;
-    var friesland = { lat: 53.164164, lng: 5.781754 };
     var targetLocation = pickRandomLocation();
+    var guess;
+
+    var test1 = { lat: 53.388410477065406, lng: 6.077347235448434};
 
     // INIT MAP + PANO
     var map = new google.maps.Map(document.getElementById("map"), {
-        center: friesland,
+        center: { lat: 53.164164, lng: 5.781754 },
         zoom: 9,
         disableDefaultUI: true
     });
@@ -31,6 +32,7 @@ function initialize() {
 	});
 
 	//
+	score = score + calculateRoundScore(targetLocation, test1);
 	confirm(targetLocation, guess);
 };
 
@@ -50,16 +52,16 @@ function placeMarker(location) {
 
 // function that returns a score based on user's guess and the location to guess (targetLocation)
 function calculateRoundScore(targetLocation, guess) {
-	var targetCoordinates = new google.maps.latLng(targetLocation.lat, targetLocation.lng);
-	var guessCoordinates = new google.maps.latLng(guess.lat, guess.lng);
-	console.log(targetCoordinates);
-	console.log(guessCoordinates);
+	var targetCoordinates = new google.maps.LatLng(targetLocation.lat, targetLocation.lng);
+	var guessCoordinates = new google.maps.LatLng(guess.lat, guess.lng);
 
 	var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guessCoordinates); //Returns the distance, in meters, between two LatLngs
-	var distanceKm = distance * 1000
+	var distanceKm = (distance / 1000).toFixed(2);
 
 	if (distanceKm < 50) {
-		score = score + ((50 - distanceKm)*2)
+		return ((50 - distanceKm)*2)
+	} else {
+		return 0
 	}
 };
 
@@ -70,7 +72,6 @@ function finishGame() {
 
 // function that prompts user to confirm their guess
 function confirm(targetLocation, guess) {
-
 	// calculate scores
     calculateRoundScore(targetLocation, guess);
     // update rounds
