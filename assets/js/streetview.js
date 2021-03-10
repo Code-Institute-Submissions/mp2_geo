@@ -17,7 +17,7 @@ function initialize() {
         zoom: 9,
         disableDefaultUI: true
     });
-    var panorama = new google.maps.StreetViewPanorama(
+    panorama = new google.maps.StreetViewPanorama(
         document.getElementById("street-view"), {
             position: targetLocation,
             pov: {
@@ -86,7 +86,6 @@ function confirm() {
         updateOverlayScore();
         updateHeader();
 		showOverlay();
-        targetLocation = pickRandomLocation();
     } else {
         finishGame();
     }
@@ -95,6 +94,8 @@ function confirm() {
 function next() {
 	round = round + 1;
 	updateHeader();
+	targetLocation = pickRandomLocation();
+	panorama.setPosition(new google.maps.LatLng(targetLocation));
 	hideOverlay();
 }
 
@@ -150,7 +151,6 @@ function pickRandomLocation() {
     return randomLocation
 };
 
-
 // UPDATE DOM
 // functions to show or hide the confirmation button
 function showConfirmationButton() {
@@ -160,6 +160,7 @@ function hideConfirmationButton() {
     document.getElementById("conf-button").style.display = 'none';
 }
 
+// function that updates the information in the header
 function updateHeader() {
 	document.getElementById("header-score").innerHTML = score;
 	document.getElementById("header-round").innerHTML = round;
@@ -174,13 +175,7 @@ function hideOverlay() {
 }
 function updateOverlayScore() {
 	hideConfirmationButton();
-	document.getElementById("round-score").innerHTML = round;
+	document.getElementById("round-number").innerHTML = "Round " + round;
 	document.getElementById("round-score").innerHTML = "Round score: " + roundScore;
 	document.getElementById("total-score").innerHTML = "Total score: " + score;
-}
-function clearOverlay() {
-	document.getElementById("round-score").innerHTML = "";
-	document.getElementById("round-score").innerHTML = "";
-	document.getElementById("total-score").innerHTML = "";
-
 }
