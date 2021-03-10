@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Working title: Where are we?</title>
-
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,500;0,700;1,100;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script type="text/javascript" src="assets/js/streetview.js"></script>
-  </head>
-  <body>
-    <header>
-      <div id="scores">
-        <p>score: 0</p> <!--placeholder-->
-        <p>turn: 1/10</p> <!--placeholder-->
-      </div>
-      <h1 id="title">Working title: where are we?</h1>
-      <button>Reset</button>
-    </header>
+</head>
 
+<body>
+    <header>
+        <div id="scores">
+            <p>score: <p id="header-score"></p>
+            </p>
+            <p>turn: <p id="header-round"></p>/10</p>
+        </div>
+        <h1 id="title">Mooi fut</h1>
+        <button onclick="restart()">Restart</button>
+    </header>
     <div id="map"></div>
     <div id="street-view"></div>
-
+    <div id="overlay">
+        <h1>Round <p id=round-number></p>
+        </h1>
+        <p id="round-score"></p>
+        <p id="total-score"></p>
+        <button onclick="restart()">Restart</button>
+        <button id="next-round-button" onclick="next()">Next round</button>
+    </div>
     <footer>
-      <button id="conf-button" onclick="confirm()">
-        Confirm
-      </button>
+        <button id="conf-button" onclick="confirm()">
+            Confirm
+        </button>
     </footer>
-
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjHptnYnfBRg8ElY_dcHdKYtK6T9CEPaA&callback=initialize&libraries=geometry&v=weekly"
-      async
-    ></script>
-  </body>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjHptnYnfBRg8ElY_dcHdKYtK6T9CEPaA&callback=initialize&libraries=geometry&v=weekly" async></script>
+</body>
+
 </html>

@@ -8,8 +8,8 @@ var map;
 var panorama;
 
 function initialize() {
+	updateHeader();
     var targetLocation = pickRandomLocation();
-    //var test1 = { lat: 53.388410477065406, lng: 6.077347235448434};
 
     // INIT MAP + PANO
     map = new google.maps.Map(document.getElementById("map"), {
@@ -65,7 +65,7 @@ function calculateRoundScore(targetLocation, guess) {
     console.log("distance: " + distanceKm)
 
     if (distanceKm < 50) {
-        return ((50 - distanceKm) * 2)
+        return Math.round((50 - distanceKm) * 2)
     } else {
         return 0
     }
@@ -76,27 +76,35 @@ function finishGame() {
 
 }
 
-// functions to show or hide the confirmation button
-function showConfirmationButton() {
-    document.getElementById("conf-button").style.display = 'block';
-}
-function hideConfirmationButton() {
-    var button = document.getElementById("conf-button");
-    button.style.display == 'none';
-}
-
 // function that prompts user to confirm their guess
 function confirm() {
-    // calculate scores
-    score = score + roundScore;
+    // update scores
+    score = Math.round(score + roundScore);
     console.log("score: " + score);
-    // update rounds
+    // next round unless all rounds are played
     if (round < 10) {
-        round = round + 1;
+        updateOverlayScore();
+        updateHeader();
+		showOverlay();
+        targetLocation = pickRandomLocation();
     } else {
         finishGame();
     }
 };
+
+function next() {
+	round = round + 1;
+	updateHeader();
+	hideOverlay();
+}
+
+function restart() {
+	score = 0;
+	round = 1;
+	marker;
+	updateHeader();
+	hideOverlay();
+}
 
 // function that returns a random location from a list of coordinates 
 function pickRandomLocation() {
@@ -141,3 +149,38 @@ function pickRandomLocation() {
 
     return randomLocation
 };
+
+
+// UPDATE DOM
+// functions to show or hide the confirmation button
+function showConfirmationButton() {
+    document.getElementById("conf-button").style.display = 'block';
+}
+function hideConfirmationButton() {
+    document.getElementById("conf-button").style.display = 'none';
+}
+
+function updateHeader() {
+	document.getElementById("header-score").innerHTML = score;
+	document.getElementById("header-round").innerHTML = round;
+}
+
+// functions to show or hide overlay etc.
+function showOverlay() {
+	document.getElementById("overlay").style.display = 'block';
+}
+function hideOverlay() {
+	document.getElementById("overlay").style.display = 'none';
+}
+function updateOverlayScore() {
+	hideConfirmationButton();
+	document.getElementById("round-score").innerHTML = round;
+	document.getElementById("round-score").innerHTML = "Round score: " + roundScore;
+	document.getElementById("total-score").innerHTML = "Total score: " + score;
+}
+function clearOverlay() {
+	document.getElementById("round-score").innerHTML = "";
+	document.getElementById("round-score").innerHTML = "";
+	document.getElementById("total-score").innerHTML = "";
+
+}
