@@ -1,14 +1,18 @@
 // function that initializes as per instructions in API documentation: https://developers.google.com/maps/documentation/javascript/examples/streetview-simple#maps_streetview_simple-html
-function initialize() {
-    var score = 0;
-    var round = 1;
-    var targetLocation = pickRandomLocation();
-    var guess;
+var score = 0;
+var roundScore = 0;
+var round = 1;
+var guess;
+var marker;
+var map;
+var panorama;
 
-    var test1 = { lat: 53.388410477065406, lng: 6.077347235448434};
+function initialize() {
+    var targetLocation = pickRandomLocation();
+    //var test1 = { lat: 53.388410477065406, lng: 6.077347235448434};
 
     // INIT MAP + PANO
-    var map = new google.maps.Map(document.getElementById("map"), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 53.164164, lng: 5.781754 },
         zoom: 9,
         disableDefaultUI: true
@@ -27,42 +31,44 @@ function initialize() {
     map.setStreetView(panorama);
 
     // DROP MARKER
-	google.maps.event.addListener(map, 'click', function(event) {
-	  placeMarker(event.latLng);
-	});
+    google.maps.event.addListener(map, 'click', function(event) {
+        placeMarker(event.latLng);
+        guess = event.latLng;
+        roundScore = calculateRoundScore(targetLocation, guess);
+        showConfirmationButton();
 
-	//
-	score = score + calculateRoundScore(targetLocation, test1);
-	confirm(targetLocation, guess);
+        console.log("roundScore: " + roundScore);
+    });
+
 };
 
 
 // HELPER FUNCTIONS
 // function that makes sure there is only one marker placed. 
 function placeMarker(location) {
-	  if ( guess ) {
-	    guess.setPosition(location);
-	  } else {
-	    guess = new google.maps.Marker({
-	      position: location,
-	      map: map
-	    });
-	  }
-	}
+    if (marker) {
+        marker.setPosition(location);
+    } else {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+}
 
 // function that returns a score based on user's guess and the location to guess (targetLocation)
 function calculateRoundScore(targetLocation, guess) {
-	var targetCoordinates = new google.maps.LatLng(targetLocation.lat, targetLocation.lng);
-	var guessCoordinates = new google.maps.LatLng(guess.lat, guess.lng);
+    var targetCoordinates = new google.maps.LatLng(targetLocation.lat, targetLocation.lng);
+    var guessCoordinates = new google.maps.LatLng(guess.lat, guess.lng);
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guess); //Returns the distance, in meters, between two LatLngs
+    var distanceKm = (distance / 1000).toFixed(2);
+    console.log("distance: " + distanceKm)
 
-	var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guessCoordinates); //Returns the distance, in meters, between two LatLngs
-	var distanceKm = (distance / 1000).toFixed(2);
-
-	if (distanceKm < 50) {
-		return ((50 - distanceKm)*2)
-	} else {
-		return 0
-	}
+    if (distanceKm < 50) {
+        return ((50 - distanceKm) * 2)
+    } else {
+        return 0
+    }
 };
 
 // function that is called when the game is ended and presents user with final score.
@@ -70,15 +76,25 @@ function finishGame() {
 
 }
 
+// functions to show or hide the confirmation button
+function showConfirmationButton() {
+    document.getElementById("conf-button").style.display = 'block';
+}
+function hideConfirmationButton() {
+    var button = document.getElementById("conf-button");
+    button.style.display == 'none';
+}
+
 // function that prompts user to confirm their guess
-function confirm(targetLocation, guess) {
-	// calculate scores
-    calculateRoundScore(targetLocation, guess);
+function confirm() {
+    // calculate scores
+    score = score + roundScore;
+    console.log("score: " + score);
     // update rounds
     if (round < 10) {
-    	round = round + 1;
+        round = round + 1;
     } else {
-    	finishGame();
+        finishGame();
     }
 };
 
@@ -86,6 +102,7 @@ function confirm(targetLocation, guess) {
 function pickRandomLocation() {
     var locations = [
         // leeuwarden
+        { lat: 53.19190191016583, lng: 5.7203841970972515 },
         { lat: 53.205544637467575, lng: 5.784500311719222 },
         { lat: 53.202030790755444, lng: 5.779193154026794 },
         { lat: 53.20580144301832, lng: 5.809182534685858 },

@@ -14,7 +14,7 @@
     <script type="text/javascript" src="assets/js/streetview.js"></script>
   </head>
   <body>
-    <header id="header">
+    <header>
       <div id="scores">
         <p>score: 0</p> <!--placeholder-->
         <p>turn: 1/10</p> <!--placeholder-->
@@ -26,7 +26,11 @@
     <div id="map"></div>
     <div id="street-view"></div>
 
-    <footer>February 2021</footer>
+    <footer>
+      <button id="conf-button" onclick="confirm()">
+        Confirm
+      </button>
+    </footer>
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
