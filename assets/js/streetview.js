@@ -1,19 +1,23 @@
 // function that initializes as per instructions in API documentation: https://developers.google.com/maps/documentation/javascript/examples/streetview-simple#maps_streetview_simple-html
 var score = 0;
+var mapCenter = { lat: 53.164164, lng: 5.781754 };
 var roundScore = 0;
 var round = 1;
 var guess;
+var guessed = [];
 var marker;
 var map;
 var panorama;
+var targetLocation;
+var targetMarker;
 
 function initialize() {
-	updateHeader();
-    var targetLocation = pickRandomLocation();
+    updateHeader();
+    targetLocation = pickRandomLocation();
 
     // INIT MAP + PANO
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 53.164164, lng: 5.781754 },
+        center: mapCenter,
         zoom: 9,
         disableDefaultUI: true
     });
@@ -73,38 +77,55 @@ function calculateRoundScore(targetLocation, guess) {
 
 // function that is called when the game is ended and presents user with final score.
 function finishGame() {
-
+    hideConfirmationButton();
+    document.getElementById("overlay-title").innerHTML = "Well done!";
+    document.getElementById("round-score").innerHTML = "Round score: " + roundScore;
+    document.getElementById("total-score").innerHTML = "Total score: " + score;
+    document.getElementById("next-round-button").style.display = 'none';
+    showOverlay();
 }
 
 // function that prompts user to confirm their guess
 function confirm() {
+    // original map view
+    map.panTo(mapCenter);
+    map.setZoom(9);
     // update scores
     score = Math.round(score + roundScore);
     console.log("score: " + score);
+    // show targetLocation on map
+    targetMarker = new google.maps.Marker({
+        position: targetLocation,
+        map: map,
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        }
+    });
     // next round unless all rounds are played
     if (round < 10) {
         updateOverlayScore();
         updateHeader();
-		showOverlay();
+        showOverlay();
     } else {
         finishGame();
     }
 };
 
 function next() {
-	round = round + 1;
-	updateHeader();
-	targetLocation = pickRandomLocation();
-	panorama.setPosition(new google.maps.LatLng(targetLocation));
-	hideOverlay();
+    round = round + 1;
+    updateHeader();
+    updateTargetLocation();
+    hideOverlay();
 }
 
 function restart() {
-	score = 0;
-	round = 1;
-	marker;
-	updateHeader();
-	hideOverlay();
+    score = 0;
+    round = 1;
+    marker;
+    guessed = [];
+    updateHeader();
+    hideOverlay();
+    updateTargetLocation();
 }
 
 // function that returns a random location from a list of coordinates 
@@ -146,36 +167,48 @@ function pickRandomLocation() {
         // schiermonnikoog
     ]
 
-    randomLocation = locations[Math.floor(Math.random() * locations.length)];
+    var randomLocation = locations[Math.floor(Math.random() * locations.length)];
+    guessed.push(randomLocation);
 
     return randomLocation
 };
+
+function updateTargetLocation() {
+    targetLocation = pickRandomLocation();
+    panorama.setPosition(new google.maps.LatLng(targetLocation));
+    map.panTo(mapCenter);
+    map.setZoom(9);
+    targetMarker.setMap(null);
+}
 
 // UPDATE DOM
 // functions to show or hide the confirmation button
 function showConfirmationButton() {
     document.getElementById("conf-button").style.display = 'block';
 }
+
 function hideConfirmationButton() {
     document.getElementById("conf-button").style.display = 'none';
 }
 
 // function that updates the information in the header
 function updateHeader() {
-	document.getElementById("header-score").innerHTML = score;
-	document.getElementById("header-round").innerHTML = round;
+    document.getElementById("header-score").innerHTML = score;
+    document.getElementById("header-round").innerHTML = round;
 }
 
 // functions to show or hide overlay etc.
 function showOverlay() {
-	document.getElementById("overlay").style.display = 'block';
+    document.getElementById("overlay").style.display = 'block';
 }
+
 function hideOverlay() {
-	document.getElementById("overlay").style.display = 'none';
+    document.getElementById("overlay").style.display = 'none';
 }
+
 function updateOverlayScore() {
-	hideConfirmationButton();
-	document.getElementById("round-number").innerHTML = "Round " + round;
-	document.getElementById("round-score").innerHTML = "Round score: " + roundScore;
-	document.getElementById("total-score").innerHTML = "Total score: " + score;
+    hideConfirmationButton();
+    document.getElementById("overlay-title").innerHTML = "Round " + round;
+    document.getElementById("round-score").innerHTML = "Round score: " + roundScore;
+    document.getElementById("total-score").innerHTML = "Total score: " + score;
 }
