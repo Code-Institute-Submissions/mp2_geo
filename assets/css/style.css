@@ -51,6 +51,10 @@ body {
 	bottom: 0;
 }
 
+.restart-button {
+	background-color: white;
+}
+
 #overlay {
 	position: fixed;
 	display: none;
