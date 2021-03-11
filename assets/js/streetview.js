@@ -37,14 +37,13 @@ function initialize() {
     // DROP MARKER
     google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(event.latLng);
-        guess = event.latlng:
-        roundScore = calculateRoundScore(targetLocation, guess);
+        guess = event.latlng;
+            roundScore = calculateRoundScore(targetLocation, guess);
         showConfirmationButton();
 
         console.log("roundScore: " + roundScore);
     });
-
-};
+}
 
 
 // HELPER FUNCTIONS
@@ -63,17 +62,16 @@ function placeMarker(location) {
 // function that returns a score based on user's guess and the location to guess (targetLocation)
 function calculateRoundScore(targetLocation, guess) {
     var targetCoordinates = new google.maps.LatLng(targetLocation.lat, targetLocation.lng);
-    var guessCoordinates = new google.maps.LatLng(guess.lat, guess.lng);
     var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guess); //Returns the distance, in meters, between two LatLngs
     var distanceKm = (distance / 1000).toFixed(2);
-    console.log("distance: " + distanceKm)
+    console.log("distance: " + distanceKm);
 
     if (distanceKm < 50) {
-        return Math.round((50 - distanceKm) * 2)
+        return Math.round((50 - distanceKm) * 2);
     } else {
-        return 0
+        return 0;
     }
-};
+}
 
 // function that is called when the game is ended and presents user with final score.
 function finishGame() {
@@ -109,7 +107,7 @@ function confirm() {
     } else {
         finishGame();
     }
-};
+}
 
 function next() {
     round = round + 1;
@@ -121,7 +119,6 @@ function next() {
 function restart() {
     score = 0;
     round = 1;
-    marker;
     guessed = [];
     updateHeader();
     hideOverlay();
@@ -199,7 +196,7 @@ function pickRandomLocation() {
         { lat: 52.96856727793018, lng: 5.971467052763902 },
         { lat: 52.94652965096347, lng: 5.873347675595512 },
         { lat: 52.85717191278747, lng: 6.074856808177568 },
-        { lat: 52.890119733820995, lng: 6.142638673358429 }, 
+        { lat: 52.890119733820995, lng: 6.142638673358429 },
         // joure
         { lat: 52.95737173868344, lng: 5.722628105821739 },
         { lat: 52.95813851571244, lng: 5.744168854582055 },
@@ -219,7 +216,7 @@ function pickRandomLocation() {
         { lat: 53.01034138615151, lng: 5.622027984448898 },
         { lat: 53.01343256493836, lng: 5.617192369077829 },
         { lat: 52.99626275586841, lng: 5.648716976508343 },
-        { lat: 53.00888970614326, lng: 5.607381264627713 }, 
+        { lat: 53.00888970614326, lng: 5.607381264627713 },
         // drachten
         { lat: 53.10536073993521, lng: 6.098307603011403 },
         { lat: 53.103336316105725, lng: 6.100755246260546 },
@@ -254,7 +251,7 @@ function pickRandomLocation() {
         { lat: 53.06158892882842, lng: 5.520095450056366 },
         { lat: 53.05962212903817, lng: 5.535136527179098 },
         { lat: 53.05458879539317, lng: 5.540592160617126 },
-        { lat: 53.06358954850745, lng; 5.499714070909069 },
+        { lat: 53.06358954850745, lng: 5.499714070909069 },
         // makkum
         { lat: 53.051889183428415, lng: 5.380684525876183 },
         { lat: 53.055174597646946, lng: 5.403781155844117 },
@@ -281,14 +278,14 @@ function pickRandomLocation() {
         { lat: 53.43772623110017, lng: 5.774612715029936 },
         // schiermonnikoog
         { lat: 53.47174562005584, lng: 6.196876467891345 },
-        { lat: 53.4797354203129, lng: 6.162766270214954 }
-    ]
+        { lat: 53.4797354203129, lng: 6.162766270214954 },
+    ];
 
     var randomLocation = locations[Math.floor(Math.random() * locations.length)];
     guessed.push(randomLocation);
 
-    return randomLocation
-};
+    return randomLocation;
+}
 
 function updateTargetLocation() {
     targetLocation = pickRandomLocation();

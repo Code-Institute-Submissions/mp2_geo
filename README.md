@@ -41,6 +41,14 @@
 	* Wireframes|cc was used for creating the wireframes for this website.
 
 ## Testing
+
+The testing of CSS and HTML was done through W3C markup Validator and the W3C CSS Validator Services. The page was tested and validated without errors. 
+
+* [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
+* [W3C Nu HTML Checker](https://validator.w3.org/nu/#textarea)
+
+JavaScript was tested through [JSHint](https://jshint.com) and returned no errors.
+
 ### Further testing
 ### Known bugs
 
