@@ -312,6 +312,15 @@ function updateHeader() {
 }
 
 // functions to show or hide overlay etc.
+function showInfoOverlay() {
+    document.getElementById("info-overlay").style.display = 'block';
+}
+
+function hideInfoOverlay() {
+    document.getElementById("info-overlay").style.display = 'none';
+}
+
+// functions to show or hide overlay etc.
 function showOverlay() {
     document.getElementById("overlay").style.display = 'block';
 }
