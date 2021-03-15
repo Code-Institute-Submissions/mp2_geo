@@ -37,8 +37,8 @@ function initialize() {
     // DROP MARKER
     google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(event.latLng);
-        guess = event.latlng;
-            roundScore = calculateRoundScore(targetLocation, guess);
+        guess = event.latLng;
+        roundScore = calculateRoundScore(targetLocation, guess);
         showConfirmationButton();
 
         console.log("roundScore: " + roundScore);
