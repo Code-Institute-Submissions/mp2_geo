@@ -40,8 +40,6 @@ function initialize() {
         guess = event.latLng;
         roundScore = calculateRoundScore(targetLocation, guess);
         showConfirmationButton();
-
-        console.log("roundScore: " + roundScore);
     });
 }
 
@@ -64,7 +62,6 @@ function calculateRoundScore(targetLocation, guess) {
     var targetCoordinates = new google.maps.LatLng(targetLocation.lat, targetLocation.lng);
     var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guess); //Returns the distance, in meters, between two LatLngs
     var distanceKm = (distance / 1000).toFixed(2);
-    console.log("distance: " + distanceKm);
 
     if (distanceKm < 50) {
         return Math.round((50 - distanceKm) * 2);
@@ -90,7 +87,6 @@ function confirm() {
     map.setZoom(9);
     // update scores
     score = Math.round(score + roundScore);
-    console.log("score: " + score);
     // show targetLocation on map
     targetMarker = new google.maps.Marker({
         position: targetLocation,
