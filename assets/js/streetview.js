@@ -1,15 +1,15 @@
 // function that initializes as per instructions in API documentation: https://developers.google.com/maps/documentation/javascript/examples/streetview-simple#maps_streetview_simple-html
-var score = 0;
-var mapCenter = { lat: 53.164164, lng: 5.781754 };
-var roundScore = 0;
-var round = 1;
-var guess;
-var guessed = [];
-var marker;
-var map;
-var panorama;
-var targetLocation;
-var targetMarker;
+let score = 0;
+const mapCenter = { lat: 53.164164, lng: 5.781754 };
+let roundScore = 0;
+let round = 1;
+let guess;
+let guessed = [];
+let marker;
+let map;
+let panorama;
+let targetLocation;
+let targetMarker;
 
 function initialize() {
     updateHeader();
@@ -59,9 +59,9 @@ function placeMarker(location) {
 
 // function that returns a score based on user's guess and the location to guess (targetLocation)
 function calculateRoundScore(targetLocation, guess) {
-    var targetCoordinates = new google.maps.LatLng(targetLocation.lat, targetLocation.lng);
-    var distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guess); //Returns the distance, in meters, between two LatLngs
-    var distanceKm = (distance / 1000).toFixed(2);
+    let targetCoordinates = new google.maps.LatLng(targetLocation.lat, targetLocation.lng);
+    let distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guess); //Returns the distance, in meters, between two LatLngs
+    let distanceKm = (distance / 1000).toFixed(2);
 
     if (distanceKm < 50) {
         return Math.round((50 - distanceKm) * 2);
@@ -123,7 +123,7 @@ function restart() {
 
 // function that returns a random location from a list of coordinates 
 function pickRandomLocation() {
-    var locations = [
+    const locations = [
         // leeuwarden
         { lat: 53.19190191016583, lng: 5.7203841970972515 },
         { lat: 53.205544637467575, lng: 5.784500311719222 },
@@ -277,7 +277,7 @@ function pickRandomLocation() {
         { lat: 53.4797354203129, lng: 6.162766270214954 },
     ];
 
-    var randomLocation = locations[Math.floor(Math.random() * locations.length)];
+    let randomLocation = locations[Math.floor(Math.random() * locations.length)];
     guessed.push(randomLocation);
 
     return randomLocation;
