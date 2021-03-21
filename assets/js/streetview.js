@@ -5,11 +5,11 @@ let roundScore = 0;
 let round = 1;
 let guess;
 let guessed = [];
-let marker;
 let map;
 let panorama;
 let targetLocation;
 let targetMarker;
+let guessMarker;
 
 function initialize() {
     updateHeader();
@@ -37,6 +37,7 @@ function initialize() {
     // DROP MARKER
     google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(event.latLng);
+        guessMarker.setVisible(true);
         guess = event.latLng;
         roundScore = calculateRoundScore(targetLocation, guess);
         showConfirmationButton();
@@ -47,10 +48,10 @@ function initialize() {
 // HELPER FUNCTIONS
 // function that makes sure there is only one marker placed. 
 function placeMarker(location) {
-    if (marker) {
-        marker.setPosition(location);
+    if (guessMarker) {
+        guessMarker.setPosition(location);
     } else {
-        marker = new google.maps.Marker({
+        guessMarker = new google.maps.Marker({
             position: location,
             map: map
         });
@@ -110,6 +111,8 @@ function next() {
     updateHeader();
     updateTargetLocation();
     hideOverlay();
+    targetMarker.setVisible(false);
+    guessMarker.setVisible(false);
 }
 
 function restart() {
@@ -288,7 +291,6 @@ function updateTargetLocation() {
     panorama.setPosition(new google.maps.LatLng(targetLocation));
     map.panTo(mapCenter);
     map.setZoom(9);
-    targetMarker.setMap(null);
 }
 
 // UPDATE DOM
