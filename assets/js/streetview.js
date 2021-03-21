@@ -64,8 +64,8 @@ function calculateRoundScore(targetLocation, guess) {
     let distance = google.maps.geometry.spherical.computeDistanceBetween(targetCoordinates, guess); //Returns the distance, in meters, between two LatLngs
     let distanceKm = (distance / 1000).toFixed(2);
 
-    if (distanceKm < 50) {
-        return Math.round((50 - distanceKm) * 2);
+    if (distanceKm < 25) {
+        return Math.round((25 - distanceKm) * 4);
     } else {
         return 0;
     }
@@ -86,6 +86,7 @@ function confirm() {
     // original map view
     map.panTo(mapCenter);
     map.setZoom(9);
+    panorama.setZoom(0);
     // update scores
     score = Math.round(score + roundScore);
     // show targetLocation on map
