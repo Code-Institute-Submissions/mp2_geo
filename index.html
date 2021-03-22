@@ -8,24 +8,24 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,500;0,700;1,100;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <script type="text/javascript" src="assets/js/streetview.js"></script>
+    <script src="assets/js/main.js"></script>
 </head>
 
 <body>
     <header>
         <div id="scores">
-            <div>score: <p id="header-score"></p>
-            </div>
+            <div>score: <p id="header-score"></p></div>
             <div>turn: <p id="header-round"></p>/10</div>
         </div>
         <h1 id="title">Mooi fut</h1>
-        <button class="restart-button" onclick="restart()">Restart</button>
-        <button onclick="showInfoOverlay()">Info</button>
+        <button class="restart-button" onclick="restart()"><i class="fa fa-repeat"></i>Restart</button>
+        <button id="info-button" onclick="showInfoOverlay()"><i class="fa fa-info-circle"></i>Info</button>
         <div id="info-overlay">
-          <h1>Info</h1>
-          <p>This is a Geoguessr inspired game on the province of Friesland. To play the game, simply guess where in Friesland the streetview panorama is taken on the map above it. Points (1-100) are rewarded to those guesses that come within 25km of being exactly right.</p>
-          <button onclick="hideInfoOverlay()">Close</button>
+            <h1>Info</h1>
+            <p>This is a Geoguessr inspired game on the province of Friesland. To play the game, simply guess where in Friesland the streetview panorama is taken on the map above it. Points (1-100) are rewarded to those guesses that come within 25km of being exactly right.</p>
+            <button onclick="hideInfoOverlay()">Close</button>
         </div>
     </header>
     <div id="map"></div>
@@ -34,8 +34,8 @@
         <h1 id=overlay-title></h1>
         <p id="round-score"></p>
         <p id="total-score"></p>
-        <button class="restart-button" onclick="restart()">Restart</button>
-        <button id="next-round-button" onclick="next()">Next round</button>
+        <button class="restart-button" onclick="restart()">Restart<i class="fa fa-repeat"></i></button>
+        <button id="next-round-button" onclick="next()">Next round<i class="fa fa-chevron-circle-right"></i></button>
     </div>
     <footer>
         <button id="conf-button" onclick="confirm()">

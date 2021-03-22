@@ -4,7 +4,6 @@ const mapCenter = { lat: 53.164164, lng: 5.781754 };
 let roundScore = 0;
 let round = 1;
 let guess;
-let guessed = [];
 let map;
 let panorama;
 let targetLocation;
@@ -119,7 +118,6 @@ function next() {
 function restart() {
     score = 0;
     round = 1;
-    guessed = [];
     updateHeader();
     hideOverlay();
     updateTargetLocation();
@@ -282,8 +280,6 @@ function pickRandomLocation() {
     ];
 
     let randomLocation = locations[Math.floor(Math.random() * locations.length)];
-    guessed.push(randomLocation);
-
     return randomLocation;
 }
 
