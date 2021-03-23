@@ -15,7 +15,9 @@
 
 ### Design
 * Colour Scheme
+	* For the colour scheme black, white and yellow are used.
 * Typography
+	* The font family used is Barlow Condensed, which falls back onto sans-serif if unavailable. 
 * Imagery
 	* All images used on this page are part of the Google Street View Static API.
 
@@ -26,6 +28,7 @@
 | ![homepage screenshot desktop](assets/img/screenshots/screenshot_desktop.png) | ![homepage screenshot mobile](assets/img/screenshots/screenshot_mobile.png) |
 
 ## Features
+* Responsive on mobile device as well as desktop sizes.
 
 ## Technologies used
 ### Languages used
@@ -38,14 +41,14 @@
 	* Git was used for version control throughout the whole project by using Github Desktop as well as command lines. 
 * [Github](https://github.com/)
 	* Github is used to store the projects code after being pushed from Git.
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview)
+	* Google Maps API is a big part of this game. It is both used for the map as well as the streetview panorama.
 * [Google Fonts](https://fonts.google.com/)
 	* Goole Fonts were used to import the Barlow Condensed font into the style.css file.
 * [Wireframes|cc](https://wireframe.cc)
 	* Wireframes|cc was used for creating the wireframes for this website.
 * [Font Awesome](https://fontawesome.com/)
-	* Font Awesome was used for the icon elements in the navigation bar in the footer as well as the social media and contact buttons in the header.
-* [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview)
-	* Google Maps API is a big part of this game. It is both used for the map as well as the streetview panorama.
+	* Font Awesome was used for the icon elements in the buttons on the website.
 
 ## Testing
 
@@ -61,6 +64,7 @@ JavaScript was tested through [JSHint](https://jshint.com) and returned no error
 Further testing was done manually.
 * For first time user user stories, I have asked friends to try this website without any further instructions. There were no bugs found and UI was found to be non-ambiguous and easy to follow.
 * Testing for responsiveness and other has been done on both desktop as well as mobile sizes on both Chrome and Safari.
+* All functions have been further tested.
 
 ### Known bugs
 The one bug that is known is that it is still possible, yet unlikely, to get the same location twice within a game. 
