@@ -1,4 +1,6 @@
 # mp2_geo
+![screenshot landing desktop](assets/img/screenshots/screenshot_desktop.png)
+[Visit](https://jildourixt.github.io/mp2_geo/.)
 
 ## User Experience (UX)
 
@@ -21,7 +23,7 @@
 | Homepage desktop | Homepage mobile |
 | ---------------- | --------------- |
 | ![homepage wireframe desktop](assets/img/wireframes/wireframe_desktop.png) | ![homepage wireframe mobile](assets/img/wireframes/wireframe_mobile.png) |
-| ![homepage screenshot desktop](assets/img/screenshots/screenshot_dekstop.png) | ![homepage screenshot mobile](assets/img/screenshots/screenshot_mobile.png) |
+| ![homepage screenshot desktop](assets/img/screenshots/screenshot_desktop.png) | ![homepage screenshot mobile](assets/img/screenshots/screenshot_mobile.png) |
 
 ## Features
 
@@ -40,6 +42,10 @@
 	* Goole Fonts were used to import the Barlow Condensed font into the style.css file.
 * [Wireframes|cc](https://wireframe.cc)
 	* Wireframes|cc was used for creating the wireframes for this website.
+* [Font Awesome](https://fontawesome.com/)
+	* Font Awesome was used for the icon elements in the navigation bar in the footer as well as the social media and contact buttons in the header.
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview)
+	* Google Maps API is a big part of this game. It is both used for the map as well as the streetview panorama.
 
 ## Testing
 
