@@ -309,6 +309,7 @@ function updateHeader() {
 // functions to show or hide overlay etc.
 function showInfoOverlay() {
     document.getElementById("info-overlay").style.display = 'block';
+    hideConfirmationButton();
 }
 
 function hideInfoOverlay() {

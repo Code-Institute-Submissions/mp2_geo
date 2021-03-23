@@ -22,10 +22,9 @@
         <h1 id="title">Mooi fut</h1>
         <button class="restart-button" onclick="restart()"><i class="fa fa-repeat"></i>Restart</button>
         <button id="info-button" onclick="showInfoOverlay()"><i class="fa fa-info-circle"></i>Info</button>
-        <div id="info-overlay">
+        <div id="info-overlay" onclick="hideInfoOverlay()">
             <h1>Info</h1>
             <p>This is a Geoguessr inspired game on the province of Friesland. To play the game, simply guess where in Friesland the streetview panorama is taken on the map above it. Points (1-100) are rewarded to those guesses that come within 25km of being exactly right.</p>
-            <button onclick="hideInfoOverlay()">Close</button>
         </div>
     </header>
     <div id="map"></div>
